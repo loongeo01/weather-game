@@ -1,0 +1,24 @@
+# Node
+node_modules/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Build output
+dist/
+build/
+
+# .NET
+bin/
+obj/
+.vs/
+
+# Visual Studio user files
+*.user
+*.suo
+
+# OS files
+.DS_Store
+Thumbs.db
