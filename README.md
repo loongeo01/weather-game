@@ -2,7 +2,6 @@ A simple game where you can check the weather and interact with small characters
 
 Link: https://loongeo01.github.io/weather-game/
 
-Credits & Asset Licenses
 
 ## Credits
 
