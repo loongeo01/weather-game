@@ -542,9 +542,6 @@ eveningEnd.setHours(19, 0, 0); // 7.00 pm
 
 
 async function createBackground() {
-
-    console.log("spawnBackground called:", weather);
-
     let rainColor = "#d2e0f7";
     let rainOpacity = 0;
 
