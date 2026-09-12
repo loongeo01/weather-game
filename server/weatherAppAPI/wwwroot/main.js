@@ -540,7 +540,8 @@ const eveningStart = new Date();
 eveningStart.setHours(17, 0, 0); // 5.00 pm
 const eveningEnd = new Date();
 eveningEnd.setHours(19, 0, 0); // 7.00 pm
-
+const morningStart = new Date();
+morningStart.setHours(7, 0, 0);
 
 async function createBackground() {
     console.log("created")
@@ -578,16 +579,18 @@ async function createBackground() {
         else if (currentTime >= eveningStart && currentTime <= eveningEnd) {
             await spawnBackground("rain_evening", 4, 5, 3);
         }
+        // Check if night time
+        else if (currentTime > eveningEnd || currentTime < morningStart) {
+            await spawnBackground("rain_night", 4, 3, 2);
+        }
+
         // Check if daytime
         else if (currentTime < eveningStart) {
             rainColor = "#5b6d82"
             rainOpacity = 0.1
             await spawnBackground("rain_day", 5, 3, 3);
         }
-        // Check if night time
-        else if (currentTime > eveningEnd) {
-            await spawnBackground("rain_night", 4, 3, 2);
-        }
+
 
         // Spawn different rain depending on rain type
         if (currentWeather.includes("light") || currentWeather.includes("patchy")) {
