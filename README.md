@@ -1,4 +1,5 @@
 A simple game where you can check the weather and interact with small characters.
+NOTE: Some of the backgrounds will be different depending on the time of day, so keep an eye out for that!
 
 Link: https://loongeo01.github.io/weather-game/
 
