@@ -460,7 +460,7 @@ async function spawnBackground(weather, num, speedAmt, startIndex) {
     }
 
     if (weather != "thunder" && !weather.includes("rain")) {
-        wind = play("wind", { loop: true, volume: 0.05 })
+        wind = play("wind", { loop: true, volume: 0.06 })
     }
 
 }
