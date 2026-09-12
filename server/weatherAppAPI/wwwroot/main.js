@@ -1,9 +1,57 @@
+/*
+ * ASSET CREDITS
+ *
+ * Character sprites:
+ * ErisEsra() - Character Templates Pack
+ * https://erisesra.itch.io/character-templates-pack
+ *
+ * Backgrounds:
+ * Craftpix.net - Free Sky with Clouds Background Pixel Art Set
+ * https://free-game-assets.itch.io/free-sky-with-clouds-background-pixel-art-set
+ *
+ * Flaticon:
+ * Background icons created by Magnific
+ * https://www.flaticon.com/free-icons/background
+ *
+ * Cloudy icons created by Konkapp
+ * https://www.flaticon.com/free-icons/cloudy
+ *
+ * Heavy rain icons created by Magnific
+ * https://www.flaticon.com/free-icons/heavy-rain
+ *
+ * Restart icons created by IYAHICON
+ * https://www.flaticon.com/free-icons/restart
+ *
+ * Cloud icons created by Magnific
+ * https://www.flaticon.com/free-icons/cloud
+ *
+ * Mist icons created by Magnific
+ * https://www.flaticon.com/free-icons/mist
+ *
+ * Rainy icons created by Magnific
+ * https://www.flaticon.com/free-icons/rainy
+ *
+ * Sunny icons created by Magnific
+ * https://www.flaticon.com/free-icons/sun
+ *
+ * Rain icons created by Magnific
+ * https://www.flaticon.com/free-icons/rain
+ *
+ * Sunny icons created by kornkun
+ * https://www.flaticon.com/free-icons/sunny
+ *
+ * Pixel Plant:
+ * Vecteezy
+ * https://www.vecteezy.com/free-vector/pixel-plant
+ */
+
+
 import kaplay from "https://unpkg.com/kaplay@4000.0.0-alpha.27.1/dist/kaplay.mjs";
 import { getCurrentWeatherData } from "./getWeather.js";
 
 kaplay({ scale: 1, font: "happy", background: [0, 0, 0, 0], canvas: document.getElementById("game"), width: 1536, height: 743, letterbox: true });
 setGravity(600);
-loadFont("google-sans", "/assets/GoogleSansFlex_9pt-Black.ttf");
+loadFont("google-sans", "assets/GoogleSansFlex_9pt-Black.ttf");
 
 setLayers(["layer1", "layer2", "layer3", "layer4", "layer5", "layer6", "beam", "weather", "player"], "player");
 
