@@ -470,6 +470,7 @@ async function spawnBackground(weather, num, speedAmt, startIndex) {
 // FOR WEATHER INFO
 const weatherData = await getCurrentWeatherData();
 const currentWeather = weatherData[1].toLowerCase()
+console.log(currentWeather)
 let weatherPath = ""
 
 if (currentWeather !== -1) {
@@ -605,6 +606,8 @@ async function createBackground() {
 }
 // GAME
 scene("game", async () => {
+
+    console.log(currentWeather)
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////
