@@ -11,7 +11,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("GamePolicy", policy =>
     {
-        policy.WithOrigins("https://loongeo01.github.io")
+        policy.WithOrigins("http://loongeo01.github.io")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
