@@ -247,7 +247,7 @@ let thunderSound
 let thunderStart
 let thunderEnd
 let wind
-function spawnBackground(weather, num, speedAmt, startIndex) {
+async function spawnBackground(weather, num, speedAmt, startIndex) {
 
     // Reset background and effects
     if (backgroundObjs) {
@@ -305,26 +305,34 @@ function spawnBackground(weather, num, speedAmt, startIndex) {
     }
 
     // LOADING SPRITES
+    const loadingSprites = [];
+
     for (let i = 1; i < num + 1; i++) {
 
         if (weather == "thunder" && i == 6) {
-            loadSprite("layer6", "assets/background/thunder/6.png", {
-                sliceX: 4,
-                anims: {
-                    "hit": {
-                        // Frame per second
-                        speed: 40,
-                        frames: [0, 1, 2, 3, 0, 0, 0, 1, 2, 3, 0]
+            loadingSprites.push(
+                loadSprite("layer6", "assets/background/thunder/6.png", {
+                    sliceX: 4,
+                    anims: {
+                        "hit": {
+                            speed: 40,
+                            frames: [0, 1, 2, 3, 0, 0, 0, 1, 2, 3, 0]
+                        },
                     },
-                },
-            });
+                })
+            );
         }
         else {
-            loadSprite(`layer${i}`, `assets/background/${weather}/${i}.png`)
+            loadingSprites.push(
+                loadSprite(
+                    `layer${i}`,
+                    `assets/background/${weather}/${i}.png`
+                )
+            );
         }
-
     }
 
+    await Promise.all(loadingSprites);
 
     // ADDING GAME OBJECTS
     for (let i = 1, speed = 0; i < num + 1; i++) {
@@ -533,51 +541,53 @@ const eveningEnd = new Date();
 eveningEnd.setHours(19, 0, 0); // 7.00 pm
 
 
-function createBackground() {
+async function createBackground() {
+
+    console.log("spawnBackground called:", weather);
 
     let rainColor = "#d2e0f7";
     let rainOpacity = 0;
 
     if (currentWeather.includes("cloudy")) {
-        spawnBackground("cloudy", 4, 5, 3);
+        await spawnBackground("cloudy", 4, 5, 3);
     }
     else if (currentWeather.includes("sunny")) {
 
         // Check if it is evening
         if (currentTime >= eveningStart && currentTime <= eveningEnd)
-            spawnBackground("evening_sunny", 4, 5, 3);
+            await spawnBackground("evening_sunny", 4, 5, 3);
         // Check if daytime
         else if (currentTime < eveningStart) {
-            spawnBackground("sunny", 6, 2, 3);
+            await spawnBackground("sunny", 6, 2, 3);
         }
 
     }
     else if (currentWeather.includes("clear")) {
-        spawnBackground("night_clear", 4, 5, 3);
+        await spawnBackground("night_clear", 4, 5, 3);
     }
     else if (currentWeather.includes("thunder")) {
-        spawnBackground("thunder", 6, 2, 2);
+        await spawnBackground("thunder", 6, 2, 2);
         spawnRain(500, "#d2e0f7", 600, 0);
     }
     else if (currentWeather.includes("rain")) {
 
 
         if (currentWeather.includes("heavy")) {
-            spawnBackground("heavy_rain", 5, 2, 2)
+            await spawnBackground("heavy_rain", 5, 2, 2)
         }
         // Check if it is evening
         else if (currentTime >= eveningStart && currentTime <= eveningEnd) {
-            spawnBackground("rain_evening", 4, 5, 3);
+            await spawnBackground("rain_evening", 4, 5, 3);
         }
         // Check if daytime
         else if (currentTime < eveningStart) {
             rainColor = "#5b6d82"
             rainOpacity = 0.1
-            spawnBackground("rain_day", 5, 3, 3);
+            await spawnBackground("rain_day", 5, 3, 3);
         }
         // Check if night time
         else if (currentTime > eveningEnd) {
-            spawnBackground("rain_night", 4, 3, 2);
+            await spawnBackground("rain_night", 4, 3, 2);
         }
 
         // Spawn different rain depending on rain type
@@ -592,7 +602,7 @@ function createBackground() {
         }
     }
     else if (currentWeather.includes("haze") || currentWeather.includes("smog")) {
-        spawnBackground("haze", 3, 5, 2);
+        await spawnBackground("haze", 3, 5, 2);
     }
 
 }
@@ -601,7 +611,7 @@ scene("game", async () => {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////
-    createBackground()
+    await createBackground()
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -919,43 +929,43 @@ scene("game", async () => {
         ]);
 
         backgroundIcons.push(icon);
-        icon.onClick(() => {
+        icon.onClick(async () => {
             if (toggled) {
                 switch (spriteName) {
                     case "sun":
                         if (currentTime >= eveningStart && currentTime <= eveningEnd)
-                            spawnBackground("evening_sunny", 4, 5, 3);
+                            await spawnBackground("evening_sunny", 4, 5, 3);
                         // Check if daytime
                         else if (currentTime < eveningStart) {
-                            spawnBackground("sunny", 6, 2, 3);
+                            await spawnBackground("sunny", 6, 2, 3);
                         }
                         break;
                     case "rain":
                         if (currentTime >= eveningStart && currentTime <= eveningEnd) {
-                            spawnBackground("rain_evening", 4, 5, 3);
+                            await spawnBackground("rain_evening", 4, 5, 3);
                             spawnRain(100, "#d2e0f7", 400, 0);
                         }
                         // Check if daytime
                         else if (currentTime < eveningStart) {
-                            spawnBackground("rain_day", 5, 3, 3);
+                            await spawnBackground("rain_day", 5, 3, 3);
                             spawnRain(100, "#5b6d82", 400, 0);
                         }
                         // Check if night time
                         else if (currentTime > eveningEnd) {
-                            spawnBackground("rain_night", 4, 3, 2);
+                            await spawnBackground("rain_night", 4, 3, 2);
                             spawnRain(100, "#d2e0f7", 400, 0);
                         }
 
                         break;
                     case "cloud":
-                        spawnBackground("cloudy", 4, 5, 3);
+                        await spawnBackground("cloudy", 4, 5, 3);
                         break;
                     case "thunder":
-                        spawnBackground("thunder", 6, 2, 2);
+                        await spawnBackground("thunder", 6, 2, 2);
                         spawnRain(500, "#d2e0f7", 600, 0);
                         break;
                     case "reload":
-                        createBackground()
+                        await createBackground()
                         break;
                 }
             }
