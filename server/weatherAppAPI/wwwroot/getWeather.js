@@ -1,6 +1,6 @@
 async function getData(latitude, longitude) {
     const url =
-        `http://localhost:5223/getWeather` +
+        `https://weather-game-lo69.onrender.com/getWeather` +
         `?latitude=${latitude}` +
         `&longitude=${longitude}`;
 
