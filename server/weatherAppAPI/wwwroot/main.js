@@ -548,7 +548,7 @@ async function createBackground() {
     let rainColor = "#d2e0f7";
     let rainOpacity = 0;
 
-    if (currentWeather.includes("cloudy")) {
+    if (currentWeather.includes("cloudy") || currentWeather.includes("overcast")) {
         await spawnBackground("cloudy", 4, 5, 3);
     }
     else if (currentWeather.includes("sunny")) {
