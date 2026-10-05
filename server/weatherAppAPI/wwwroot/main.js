@@ -943,6 +943,7 @@ scene("game", async () => {
                             await spawnBackground("sunny", 6, 2, 3);
                         }
                         else {
+                            console.log("test")
                             await spawnBackground("night_clear", 4, 5, 3);
                         }
                         break;
