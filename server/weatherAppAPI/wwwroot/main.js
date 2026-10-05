@@ -942,6 +942,9 @@ scene("game", async () => {
                         else if (currentTime < eveningStart) {
                             await spawnBackground("sunny", 6, 2, 3);
                         }
+                        else {
+                            await spawnBackground("night_clear", 4, 5, 3);
+                        }
                         break;
                     case "rain":
                         if (currentTime >= eveningStart && currentTime <= eveningEnd) {
