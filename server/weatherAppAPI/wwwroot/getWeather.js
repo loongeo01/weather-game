@@ -24,30 +24,30 @@ async function getData(latitude, longitude) {
 
 export function getCurrentWeatherData() {
 
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
 
         var data = []
+        const result = await getData(4.608838160732616,
+            114.33079117686476
+        );
 
-        navigator.geolocation.getCurrentPosition(async (position) => {
+        if (result === -1) {
+            reject(new Error("Failed to retrieve weather data"));
+            return;
+        }
 
-            const result = await getData(
-                position.coords.latitude,
-                position.coords.longitude
-            );
+        const temperature = result.current.temp_c;
+        data.push(temperature)
 
-            if (result === -1) {
-                reject(new Error("Failed to retrieve weather data"));
-                return;
-            }
+        var currentWeather = result.current.condition.text
+        data.push(currentWeather)
+        resolve(data)
 
-            const temperature = result.current.temp_c;
-            data.push(temperature)
+        // navigator.geolocation.getCurrentPosition(async (position) => {
 
-            var currentWeather = result.current.condition.text
-            data.push(currentWeather)
-            resolve(data)
 
-        });
+
+        // });
     });
 
 }
