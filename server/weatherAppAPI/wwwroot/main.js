@@ -468,17 +468,8 @@ async function spawnBackground(weather, num, speedAmt, startIndex) {
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 // FOR WEATHER INFO
-let weatherData = ["32", "sunny"]
-let currentWeather = weatherData[1].toLowerCase()
-getCurrentWeatherData().then((value) => {
-    weatherData = value
-    currentWeather = value[1].toLowerCase()
-    console.log("YES it reached here")
-}).catch((e) => {
-    console.log(e)
-})
-
-
+let weatherData = await getCurrentWeatherData();
+let currentWeather = await weatherData[1].toLowerCase()
 console.log(currentWeather)
 let weatherPath = ""
 
