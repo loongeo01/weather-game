@@ -473,6 +473,7 @@ let currentWeather = weatherData[1].toLowerCase()
 getCurrentWeatherData().then((value) => {
     weatherData = value
     currentWeather = value[1].toLowerCase()
+    console.log("YES it reached here")
 }).catch((e) => {
     console.log(e)
 })
