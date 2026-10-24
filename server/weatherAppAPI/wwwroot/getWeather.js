@@ -47,7 +47,7 @@ export function getCurrentWeatherData() {
             data.push(currentWeather)
             resolve(data)
 
-        }, reject("Yo this sucks"));
+        }, reject(["32", "Sunny"]));
     });
 
 }
