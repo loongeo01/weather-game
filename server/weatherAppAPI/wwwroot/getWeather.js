@@ -47,7 +47,7 @@ export function getCurrentWeatherData() {
             data.push(currentWeather)
             resolve(data)
 
-        }, reject(["32", "Sunny"]));
+        });
     });
 
 }
