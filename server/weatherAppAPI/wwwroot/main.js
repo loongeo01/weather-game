@@ -468,8 +468,14 @@ async function spawnBackground(weather, num, speedAmt, startIndex) {
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 // FOR WEATHER INFO
-const weatherData = await getCurrentWeatherData();
-const currentWeather = weatherData[1].toLowerCase()
+let weatherData = ["32", "sunny"]
+let currentWeather = weatherData[1].toLowerCase()
+getCurrentWeatherData().then((value) => {
+    weatherData = value
+    currentWeather = value[1].toLowerCase()
+});
+
+
 console.log(currentWeather)
 let weatherPath = ""
 
@@ -508,6 +514,9 @@ if (currentWeather !== -1) {
     }
     else if (currentWeather.includes("smoke") || currentWeather.includes("smog")) {
         weatherPath = "assets/weather_icons/smoke.png"
+    }
+    else {
+        weatherPath = "assets/weather_icons/sunny.png"
     }
 }
 
@@ -605,6 +614,9 @@ async function createBackground() {
     }
     else if (currentWeather.includes("haze") || currentWeather.includes("smog")) {
         await spawnBackground("haze", 3, 5, 2);
+    }
+    else {
+        await spawnBackground("sunny", 6, 2, 3);
     }
 
 }
