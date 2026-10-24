@@ -26,28 +26,26 @@ export function getCurrentWeatherData() {
 
     return new Promise(async (resolve, reject) => {
 
-        var data = []
-        const result = await getData(4.608838160732616,
-            114.33079117686476
-        );
+        navigator.geolocation.getCurrentPosition(async (position) => {
+            var data = []
+            const result = await getData(
+                position.coords.latitude,
+                position.coords.longitude
+            );
 
-        if (result === -1) {
-            reject(new Error("Failed to retrieve weather data"));
-            return;
-        }
+            if (result === -1) {
+                reject(new Error("Failed to retrieve weather data"));
+                return;
+            }
 
-        const temperature = result.current.temp_c;
-        data.push(temperature)
+            const temperature = result.current.temp_c;
+            data.push(temperature)
 
-        var currentWeather = result.current.condition.text
-        data.push(currentWeather)
-        resolve(data)
+            var currentWeather = result.current.condition.text
+            data.push(currentWeather)
+            resolve(data)
 
-        // navigator.geolocation.getCurrentPosition(async (position) => {
-
-
-
-        // });
+        });
     });
 
 }
