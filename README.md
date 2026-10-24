@@ -1,6 +1,6 @@
 A simple game where you can check the weather and interact with small characters. The background will change depending on the weather and time of day. But you can also change the backgrounds via the icons at the top right if you want to view the other backgrounds.
 
-NOTE: Some of the backgrounds have sound in them, so keep an eye out for that.
+NOTE: Please allow the page to have location access otherwise it won't work!
 
 Link: https://loongeo01.github.io/weather-game/
 
